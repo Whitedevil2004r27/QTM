@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Mail } from "lucide-react";
+import { COMPANY_INFO, COMPANY_DISCLAIMER } from "@/lib/content";
 
 export function SiteFooter() {
   return (
@@ -12,7 +13,7 @@ export function SiteFooter() {
             <em>Made for what&apos;s next.</em>
           </h2>
         </div>
-        <Link className="round-link" href="/contact" aria-label="Contact QTM">
+        <Link className="round-link" href="/contact" aria-label="Contact QTM Sales Desk">
           <ArrowUpRight size={22} />
         </Link>
       </div>
@@ -20,41 +21,64 @@ export function SiteFooter() {
       <nav className="footer-nav" aria-label="Footer navigation">
         <div className="footer-nav-group">
           <strong>Minerals</strong>
-          <Link href="/minerals/china-clay">China Clay</Link>
-          <Link href="/minerals/bentonite">Bentonite</Link>
+          <Link href="/minerals/china-clay">China Clay (Kaolin)</Link>
+          <Link href="/minerals/bentonite">Industrial Bentonite</Link>
           <Link href="/minerals/silica-sand">Silica Sand</Link>
-          <Link href="/minerals/bauxite">Bauxite</Link>
-          <Link href="/minerals/ball-clay">Ball Clay</Link>
-          <Link href="/minerals/quartz">Quartz</Link>
+          <Link href="/minerals/bauxite">Bauxite Ore</Link>
+          <Link href="/minerals/ball-clay">Plastic Ball Clay</Link>
+          <Link href="/minerals/quartz">Crystalline Quartz</Link>
         </div>
+
         <div className="footer-nav-group">
           <strong>Company</strong>
-          <Link href="/about">Our Story</Link>
-          <Link href="/capabilities">Capabilities</Link>
-          <Link href="/industries">Industries</Link>
-          <Link href="/contact">Contact</Link>
+          <Link href="/about">Corporate Story &amp; Heritage</Link>
+          <Link href="/capabilities">Processing &amp; QA Capabilities</Link>
+          <Link href="/industries">Manufacturing Sectors</Link>
+          <Link href="/contact">Direct Inquiries &amp; Quotations</Link>
+          <Link href="/sitemap.xml">XML Sitemap</Link>
         </div>
+
         <div className="footer-nav-group">
-          <strong>Locations</strong>
-          <span style={{ color: "var(--muted-lt)", fontSize: 13 }}>
-            Processing plant<br />Gujarat, India
+          <strong>Operating Presence</strong>
+          <span style={{ color: "var(--paper)", fontSize: 13, fontWeight: 500 }}>
+            Processing Facility
           </span>
-          <span style={{ color: "var(--muted-lt)", fontSize: 13 }}>
-            South India office<br />Chennai, India
+          <span style={{ color: "var(--muted-lt)", fontSize: 12 }}>
+            Gujarat Industrial Corridor, India
           </span>
+          <span style={{ color: "var(--paper)", fontSize: 13, fontWeight: 500, marginTop: 8 }}>
+            Southern Liaison Office
+          </span>
+          <span style={{ color: "var(--muted-lt)", fontSize: 12 }}>
+            Chennai, Tamil Nadu, India
+          </span>
+          <div style={{ marginTop: 12 }}>
+            <a
+              href={`mailto:${COMPANY_INFO.channels.salesEmail}`}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 6,
+                fontSize: 12,
+                color: "var(--gold)",
+                textDecoration: "none",
+              }}
+            >
+              <Mail size={13} /> {COMPANY_INFO.channels.salesEmail}
+            </a>
+          </div>
         </div>
+
         <div className="footer-nav-group">
-          <strong>Note</strong>
+          <strong>Corporate Notice</strong>
           <span style={{ color: "var(--muted)", fontSize: 11, lineHeight: 1.65 }}>
-            Product descriptions are introductory copy only. Verify all
-            specifications, certifications and contact details with QTM
-            before publication.
+            {COMPANY_DISCLAIMER}
           </span>
         </div>
       </nav>
 
       <div className="footer-bottom">
-        <Link href="/" className="footer-brand">
+        <Link href="/" className="footer-brand" aria-label="QTM Minerals Homepage">
           QTM<span>&#174;</span>
           <small>Quantum Terra Minerals</small>
         </Link>
@@ -62,7 +86,7 @@ export function SiteFooter() {
           &copy; {new Date().getFullYear()} Quantum Terra Minerals. All rights reserved.
         </span>
         <span style={{ textAlign: "right" }}>
-          Industrial &amp; performance minerals &middot; India to the world
+          Industrial &amp; performance minerals &middot; Gujarat, India to the world
         </span>
       </div>
     </footer>

@@ -1,13 +1,43 @@
 import Link from "next/link";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
-import { minerals, industries, companyStats } from "@/lib/content";
+import { minerals, industries, companyStats, COMPANY_DISCLAIMER, COMPANY_INFO } from "@/lib/content";
 import { MineralCard } from "@/components/MineralCard";
 import { SectionHeading } from "@/components/SectionHeading";
 import { Reveal } from "@/components/Reveal";
 
 export default function HomePage() {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://qtmminerals.com";
+
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Corporation",
+    name: COMPANY_INFO.name,
+    alternateName: COMPANY_INFO.shortName,
+    url: siteUrl,
+    logo: `${siteUrl}/images/mineral-kaolin.png`,
+    foundingDate: COMPANY_INFO.establishedYear,
+    description:
+      "Quantum Terra Minerals is an industrial minerals producer and processor in Gujarat, India, supplying China clay (kaolin), bentonite, silica sand, bauxite, ball clay and quartz.",
+    address: {
+      "@type": "PostalAddress",
+      addressRegion: "Gujarat",
+      addressCountry: "IN",
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "Sales & Inquiries",
+      email: COMPANY_INFO.channels.salesEmail,
+      availableLanguage: ["English", "Hindi", "Gujarati"],
+    },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
+
       {/* ── Hero ── */}
       <section className="hero">
         <div className="hero-bg" aria-hidden="true" />
@@ -19,20 +49,19 @@ export default function HomePage() {
             <em>Engineered for industry.</em>
           </h1>
           <p className="hero-copy">
-            Industrial and performance minerals, shaped by nature and refined
-            for the materials that move the world forward.
+            Industrial and performance minerals, shaped by geology and processed with discipline for the manufacturing sectors that build the future.
           </p>
           <div className="hero-actions">
             <Link className="button-primary" href="/minerals">
-              Explore our minerals <ArrowUpRight size={15} />
+              Explore Our Minerals <ArrowUpRight size={15} />
             </Link>
             <Link className="text-link" href="/about">
-              Discover QTM <ArrowDown size={13} />
+              Discover QTM Heritage <ArrowDown size={13} />
             </Link>
           </div>
         </div>
         <div className="hero-side-note" aria-hidden="true">
-          MATERIAL INTELLIGENCE &middot; INDIA TO THE WORLD
+          MINERAL VALUE-CHAIN &middot; GUJARAT TO THE WORLD
         </div>
         <div className="hero-bottom" aria-hidden="true">
           <span>Industrial &amp; performance minerals</span>
@@ -43,9 +72,9 @@ export default function HomePage() {
       {/* ── Intro strip ── */}
       <div className="intro-strip">
         <span>
-          <strong>Nature is the origin.</strong> Precision is the difference.
+          <strong>Geology is the origin.</strong> Precision processing is the difference.
         </span>
-        <span>GUJARAT, INDIA &mdash; GLOBAL AMBITION</span>
+        <span>GUJARAT, INDIA &mdash; GLOBAL EXPORT CAPABILITY</span>
       </div>
 
       {/* ── Story split ── */}
@@ -58,19 +87,16 @@ export default function HomePage() {
                 "linear-gradient(0deg,rgba(9,10,9,.2),transparent),url('/images/mineral-kaolin.png')",
             }}
           >
-            <span className="image-caption">01 / The material journey</span>
+            <span className="image-caption">01 / Mineral Beneficiation Journey</span>
           </div>
           <div className="split-copy">
-            <div className="eyebrow">Precision in mineral processing</div>
+            <div className="eyebrow">Discipline in Mineral Beneficiation</div>
             <h2>
               From the ground up.<br />
               <em>With purpose.</em>
             </h2>
             <p>
-              Quantum Terra Minerals works across the mineral value chain,
-              supplying materials for industrial applications. Our focus is on
-              dependable partnerships, application-led solutions and responsible
-              resource management.
+              Quantum Terra Minerals operates across the industrial mineral value chain, processing earth materials into classified, reliable inputs for demanding industrial sectors. Our focus centers on long-term supply partnerships, continuous laboratory testing, and responsible resource stewardship.
             </p>
             <div className="stat-row">
               {companyStats.map((s) => (
@@ -92,8 +118,8 @@ export default function HomePage() {
         <Reveal>
           <SectionHeading
             kicker="The mineral collection / 01—06"
-            title="Essential materials.<br/>Considered differently."
-            text="Explore the core mineral groups presented by QTM. Detailed technical specifications should be confirmed with the company for each grade and application."
+            title="Essential materials.<br/>Engineered with precision."
+            text="Explore the six core industrial mineral groups processed by QTM. Certified technical parameters, particle distributions and laboratory assays are provided per inquiry."
           />
         </Reveal>
         <div className="mineral-grid">
@@ -106,7 +132,7 @@ export default function HomePage() {
         <Reveal delay={1}>
           <div style={{ marginTop: 44 }}>
             <Link className="text-link" href="/minerals">
-              View all minerals <ArrowUpRight size={15} />
+              View all 6 mineral groups <ArrowUpRight size={15} />
             </Link>
           </div>
         </Reveal>
@@ -117,8 +143,8 @@ export default function HomePage() {
         <Reveal>
           <SectionHeading
             kicker="Where materials make a difference"
-            title="Built into the industries<br/>that shape everyday life."
-            text="Mineral applications span a wide range of manufacturing sectors. The right grade depends on your process, formulation and technical requirements."
+            title="Supplying the sectors<br/>that shape modern manufacturing."
+            text="Mineral formulations tuned to specific process chemistry — from vitreous sanitaryware and ceramic bodies to paper coating, foundry casting and specialty polymers."
           />
         </Reveal>
         <div className="industry-list">
@@ -138,27 +164,43 @@ export default function HomePage() {
       {/* ── Quote ── */}
       <Reveal>
         <section className="quote-section">
-          <div className="eyebrow">Our point of view</div>
+          <div className="eyebrow">Corporate philosophy</div>
           <blockquote>
-            &ldquo;Minerals are more than natural resources. They are the
-            foundation of innovation, infrastructure and industrial progress.&rdquo;
+            &ldquo;Minerals are more than extracted resources. They are the chemical and structural foundation of technological advancement and global infrastructure.&rdquo;
           </blockquote>
-          <p>QUANTUM TERRA MINERALS &middot; COMPANY PHILOSOPHY</p>
+          <p>QUANTUM TERRA MINERALS &middot; EXECUTIVE STATEMENT</p>
         </section>
+      </Reveal>
+
+      {/* ── Corporate Transparency Disclosure ── */}
+      <Reveal>
+        <div
+          style={{
+            margin: "0 var(--gutter) 40px",
+            padding: "16px 20px",
+            backgroundColor: "rgba(9, 10, 9, 0.7)",
+            border: "1px solid rgba(236, 232, 219, 0.08)",
+            fontSize: 11,
+            color: "var(--muted)",
+            lineHeight: 1.6,
+          }}
+        >
+          {COMPANY_DISCLAIMER}
+        </div>
       </Reveal>
 
       {/* ── CTA Band ── */}
       <Reveal>
         <section className="cta-band">
           <div>
-            <div className="eyebrow">Have a material requirement?</div>
+            <div className="eyebrow">Direct Commercial Inquiries</div>
             <h2>
-              Let&apos;s find the right<br />
-              <em>mineral solution.</em>
+              Let&apos;s establish the right<br />
+              <em>mineral specification.</em>
             </h2>
           </div>
           <Link className="button-primary" href="/contact">
-            Talk to our team <ArrowUpRight size={16} />
+            Talk to technical sales <ArrowUpRight size={16} />
           </Link>
         </section>
       </Reveal>
